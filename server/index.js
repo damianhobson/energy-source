@@ -21,7 +21,14 @@ app.get("/api/fuelmix", (req, res) => {
   .then((response) => response.json())
   .then((data) => {
     console.log('Sending : ', data);
-    res.json(data);
+    const cleanData = data.Rows
+      .filter(row => {
+        return (row.Value === null) ? false : row;
+      })
+      .map(row => {
+        return {'date': Date.parse(row.EffectiveTime), 'name': row.FieldName, 'value': row.Value};
+      })
+    res.json(cleanData);
   })
   .catch((error) => console.log(error));
 });

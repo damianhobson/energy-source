@@ -19,7 +19,7 @@ interface ValueLine {
 
 const getTimestamp = (d: number) => {
   const tickTime = new Date(d);
-  return `${tickTime.getHours()}:${tickTime.getMinutes()}:${tickTime.getSeconds()}`;
+  return `${tickTime.getHours()}:${(tickTime.getMinutes() < 10 ? '0' : '') + tickTime.getMinutes() }:${(tickTime.getSeconds() < 10 ? '0' : '') +tickTime.getSeconds()}`;
 };
 
 export const Axis = (props: Props) => {
@@ -30,7 +30,7 @@ export const Axis = (props: Props) => {
 
   const yScale = d3.scaleLinear()
     .domain([0, props.maxY] || [0,0])
-    .range([props.height, 0 ] || [0,0])
+    .range([props.height, props.margin[1]] || [0,0])
 
   const ticksX = useMemo(() => {
     const pixelsPerTick = 30
@@ -109,7 +109,7 @@ export const Axis = (props: Props) => {
               fontSize: "4px",
               fill: "#FFF",
               textAnchor: "end",
-              transform: "translateX(-4px)"
+              transform: "translateX(-4px)translateY(+3px)"
             }}>
             { value }
           </text>

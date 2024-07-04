@@ -1,5 +1,4 @@
-import React from 'react';
-import {useEffect, useState, useMemo} from 'react';
+import {useEffect, useState} from 'react';
 import * as d3 from 'd3';
 
 interface Props {
@@ -10,6 +9,7 @@ interface Props {
   strokeWidth: number;
   strokeColor: string;
   maxY: number;
+  setMaxY: Function;
   setDomainX: Function;
   domainX: [Date, Date];
 }
@@ -27,6 +27,8 @@ export const GraphLine = (props: Props) => {
       .then((data) => {
         const minDomainDate:any = d3.min(data.map((d: { date: Date; }) => d.date)) || new Date();
         const maxDomainDate:any = d3.max(data.map((d: { date: Date; }) => d.date)) || new Date();
+        const maxValue:any = d3.max(data.map((d: { value: number; }) => d.value)) || 0;
+        if (maxValue > props.maxY) props.setMaxY(maxValue + 10);
         props.setDomainX([minDomainDate, maxDomainDate]);
         setpathData(data);
     });
@@ -38,7 +40,7 @@ export const GraphLine = (props: Props) => {
 
   const yScale = d3.scaleLinear()
     .domain([0, props.maxY] || [0,0])
-    .range([props.height, 0 ] || [0,0])
+    .range([props.height, props.margin[1]] || [0,0])
 
   const valuePath = d3.line<ValueLine>()
     .x((d) => { return xScale(d.date || 0); })

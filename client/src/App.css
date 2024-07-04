@@ -31,15 +31,18 @@ body{
 section.App-main{
   background-color: #282c34;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   
   .graphContainer {
+    margin: 0 auto;
+    margin-bottom: 20px;;
     border: 2px solid #FFF;
     padding: 20px;
     border-radius: 10px;
     min-height: 300px;
     width: 80%;
+
 
     .title{
      color: #FFF;
@@ -49,6 +52,29 @@ section.App-main{
       .ticks{
         font-size: 5px;
         color: #FFF
+      }
+    }
+    .legend{
+
+      border-radius: 3px;
+      margin: 0 auto;
+      color:#FFF;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      
+      .item{
+        display: flex;
+        flex-direction: row;
+        margin-right: 20px;
+        .name{
+          margin: 0 10px;
+        }
+        .colorLine{
+          margin-top: 6px;
+          width: 20px;
+          height: 8px;
+        }
       }
     }
  }
