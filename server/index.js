@@ -18,9 +18,8 @@ app.get("/api/fuelmix", (req, res) => {
     "body": null,
     "method": "GET"
   })
-  .then((response) => response.json())
+  .then((response) =>  response.json())
   .then((data) => {
-    console.log('Sending : ', data);
     const cleanData = data.Rows
       .filter(row => {
         return (row.Value === null) ? false : row;
@@ -33,8 +32,6 @@ app.get("/api/fuelmix", (req, res) => {
   .catch((error) => console.log(error));
 });
 app.get("/api/graph", (req, res) => {
-  console.log('dateToday() ', dateToday());
-  console.log('req type ', req.query.type);
   fetch(`https://smartgriddashboard.com/DashboardService.svc/data?area=${req.query.type}&region=ALL&datefrom=${dateToday()}+00%3A00&dateto=${dateToday()}+23%3A59`, {
     "headers": {
       "accept": "application/json, text/javascript, */*; q=0.01",
@@ -53,7 +50,6 @@ app.get("/api/graph", (req, res) => {
       .map(row => {
         return {'date': Date.parse(row.EffectiveTime), 'value': row.Value};
       })
-    // console.log('Sending : ', cleanData);
     res.json(cleanData);
   })
   .catch((error) => console.log(error));

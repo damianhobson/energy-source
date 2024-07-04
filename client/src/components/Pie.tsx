@@ -9,6 +9,7 @@ interface Props {
   strokeColor: string;
   innerRadius: number;
   outerRadius: number;
+  paletteMap: {key:string, name:string, color:string}[];
 }
 
 interface ArcProps {
@@ -28,16 +29,17 @@ export const Pie = (props: Props) => {
   const [pieData, setPieData] = useState<ArcValue[]>([]);
 
   useEffect(() => {
-    fetch(`/api/graph?type=fuelmix`)
+    fetch(`/api/fuelmix`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setPieData(data);
     });
   }, []);
 
   const Arc = (arc:ArcProps) => (
     <g key={arc.index} className="arc">
-      <path className="arc" d={arc.createArc(arc.data)} fill={arc.colors(arc.index)} />
+      <path className="arc" d={arc.createArc(arc.data)} fill={arc.colors(arc.data)} />
       <text
         // transform={`translate(${createArc.centroid(arc.data)})`}
         textAnchor="middle"
@@ -57,9 +59,11 @@ export const Pie = (props: Props) => {
     .arc<d3.PieArcDatum<ArcValue>>()
     .innerRadius(props.innerRadius)
     .outerRadius(props.outerRadius);
-
-    //d3.line<ValueLine>()
-  const colors = d3.scaleOrdinal(d3.schemeSet3);
+  const palette = Object.assign({}, ...props.paletteMap.map((item)=> ({ [item.key]: item.color }) ));
+  const colors = (data:any) => {
+    console.log(data.data.name, ' | ', palette[data.data.name]);
+    return palette[data.data.name] || '#FFF';
+  };
   const format = d3.format(".2f");
   const data = createPie(pieData);
 
