@@ -6,7 +6,7 @@ interface Props {
 
 const graphs = [{type:'windactual', name:'Wind Generated', color:'#487a02'}, {type:'demandactual', name:'Total Demand', color:'#c46f54'}];
 const labels = graphs.map((graph) => {return {name : graph.name, color: graph.color}});
- //[{name:'windactual', color:'#487a02'}, {lame:'demandactual', color:'#c46f54'}]
+
 export const GraphContainer = (props: Props) => {
   return (
     <div className="graphContainer">

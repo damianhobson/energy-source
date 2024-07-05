@@ -16,13 +16,15 @@ interface ArcProps {
   data: ArcValue;
   index: number;
   createArc: Function;
+  centroid: Function;
   colors: Function;
   format: Function;
 }
 
 interface ArcValue {
     name?: string;
-    value?: number;
+    value: number;
+    percentage?:number;
 }
 
 export const Pie = (props: Props) => {
@@ -32,8 +34,9 @@ export const Pie = (props: Props) => {
     fetch(`/api/fuelmix`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setPieData(data);
+        const total = data.reduce((acc: number, dataPoint: { value: number; } ) => acc + dataPoint.value, 0);
+        const addPercentage = data.map((dataPoint: { value: number; }) => ({percentage: ((dataPoint.value / total) * 100).toFixed(2), ...dataPoint}));
+        setPieData(addPercentage);
     });
   }, []);
 
@@ -41,12 +44,10 @@ export const Pie = (props: Props) => {
     <g key={arc.index} className="arc">
       <path className="arc" d={arc.createArc(arc.data)} fill={arc.colors(arc.data)} />
       <text
-        // transform={`translate(${createArc.centroid(arc.data)})`}
-        textAnchor="middle"
-        fill="white"
-        fontSize="10"
+        transform={`translate(${arc.centroid(arc.data)})`}
+        textAnchor="middle" fill="white" fontSize="10"
       >
-        {arc.format(arc.data.value)}
+        {arc.format(arc.data)}
       </text>
     </g>
   );
@@ -59,12 +60,10 @@ export const Pie = (props: Props) => {
     .arc<d3.PieArcDatum<ArcValue>>()
     .innerRadius(props.innerRadius)
     .outerRadius(props.outerRadius);
-  const palette = Object.assign({}, ...props.paletteMap.map((item)=> ({ [item.key]: item.color }) ));
-  const colors = (data:any) => {
-    console.log(data.data.name, ' | ', palette[data.data.name]);
-    return palette[data.data.name] || '#FFF';
-  };
-  const format = d3.format(".2f");
+  const palette = Object.assign({}, ...props.paletteMap.map((item)=> ({[item.key]: item.color})));
+  const colors = (data:any) => (palette[data.data.name] || '#FFF');
+  const format = (data:any) => (data.data.percentage + '%') 
+
   const data = createPie(pieData);
 
   return (
@@ -76,6 +75,7 @@ export const Pie = (props: Props) => {
               index={i}
               data={d}
               createArc={createArc}
+              centroid={createArc.centroid}
               colors={colors}
               format={format}
             />
