@@ -1,13 +1,21 @@
 const express = require("express");
-
+const path = require('path');
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const dateToday = () => {
   const nowDate = new Date();
   return nowDate.getDate()+'-'+(months[nowDate.getMonth()])+'-'+nowDate.getFullYear();
 }
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+ });
+
 app.get("/api/fuelmix", (req, res) => {
   fetch(`https://smartgriddashboard.com/DashboardService.svc/data?area=fuelmix&region=ALL&datefrom=${dateToday()}+00%3A00&dateto=${dateToday()}+23%3A59`, {
     "headers": {
