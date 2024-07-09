@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Where is our Power coming from?</h1>
+        <h1>Electricity Generation Ireland</h1>
       </header>
       <section className="App-main"> 
         <GraphContainer title="Wind Generated"/>
