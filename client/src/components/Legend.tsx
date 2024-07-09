@@ -1,4 +1,4 @@
-import { Chart } from './Chart'
+import React from 'react'
 
 interface Props {
   labels: {name:string, color:string}[];
