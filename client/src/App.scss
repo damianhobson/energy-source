@@ -1,31 +1,11 @@
-/* body{
+body{
   background-color: #282c34;
 }
-
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .App-header {
+    color: #FFF;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 section.App-main{
@@ -35,6 +15,9 @@ section.App-main{
   justify-content: center;
   
   .graphContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 0 auto;
     margin-bottom: 20px;;
     border: 2px solid #FFF;
@@ -42,8 +25,6 @@ section.App-main{
     border-radius: 10px;
     min-height: 300px;
     width: 80%;
-
-
     .title{
      color: #FFF;
     }
@@ -54,15 +35,16 @@ section.App-main{
         color: #FFF
       }
     }
+    .pie{
+      margin: 0 auto;
+    }
     .legend{
       display: flex;
       border-radius: 3px;
       margin: 0 auto;
       color:#FFF;
-      display: flex;
       flex-direction: row;
       justify-content: center;
-      
       .item{
         display: flex;
         flex-direction: row;
@@ -78,5 +60,4 @@ section.App-main{
       }
     }
  }
-} */
-
+}

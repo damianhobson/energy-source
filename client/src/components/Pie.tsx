@@ -67,20 +67,22 @@ export const Pie = (props: Props) => {
   const data = createPie(pieData);
 
   return (
-    <svg width={props.width} viewBox={`0 0 ${props.width} ${props.height+20}`}>
-      <g transform={`translate(${props.outerRadius + props.margin[0]} ${props.outerRadius + props.margin[1]})`}>
-          {data.map((d, i) => (
-            <Arc
-              key={i}
-              index={i}
-              data={d}
-              createArc={createArc}
-              centroid={createArc.centroid}
-              colors={colors}
-              format={format}
-            />
-          ))}
-        </g>
-      </svg>
+    <div className='pie'>
+      <svg width={props.width} viewBox={`0 0 ${props.width} ${props.height+20}`}>
+        <g transform={`translate(${props.outerRadius + props.margin[0]} ${props.outerRadius + props.margin[1]})`}>
+            {data.map((d, i) => (
+              <Arc
+                key={i}
+                index={i}
+                data={d}
+                createArc={createArc}
+                centroid={createArc.centroid}
+                colors={colors}
+                format={format}
+              />
+            ))}
+          </g>
+        </svg>
+      </div>
   )
 }

@@ -1,5 +1,4 @@
-import React from 'react';
-import './App.css';
+import './App.scss';
 import { GraphContainer } from './components/GraphContainer';
 import { PieContainer } from './components/PieContainer';
 function App() {
