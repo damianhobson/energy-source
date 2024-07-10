@@ -1,7 +1,6 @@
-import React from 'react';
-import {useEffect, useState, useMemo} from 'react';
+import {useMemo} from 'react';
 import * as d3 from 'd3';
-// import { graphLine } from './graphLine';
+
 interface Props {
   width: number;
   height: number;
@@ -11,10 +10,6 @@ interface Props {
   setDomainX: Function;
   domainX: [Date, Date];
   margin: [number, number];
-}
-interface ValueLine {
-  date: number;
-  value: number;
 }
 
 const getTimestamp = (d: number) => {
@@ -33,7 +28,7 @@ export const Axis = (props: Props) => {
     .range([props.height, props.margin[1]] || [0,0])
 
   const ticksX = useMemo(() => {
-    const pixelsPerTick = 30
+    const pixelsPerTick = 50
     const numberOfTicksTarget = Math.max(
       1,
       Math.floor(
@@ -69,8 +64,8 @@ export const Axis = (props: Props) => {
 
   return (
     <g>
-      <path d={`M ${props.margin[0]} ${props.height - props.margin[1]}.5 H ${props.width - props.margin[0]}`} stroke="#FFF"/>
-      <path d={`M ${props.margin[0]} ${props.height - props.margin[1]}.5 L ${props.margin[0]} 0`} stroke="#FFF"/>
+      <path d={`M ${props.margin[0]} ${props.height - props.margin[1]} H ${props.width - props.margin[0]}`} stroke="#FFF"/>
+      <path d={`M ${props.margin[0]} ${props.height - props.margin[1]} L ${props.margin[0]} 0`} stroke="#FFF"/>
       {ticksX.map(({ value, xOffset }) => (
         <g
           key={value}

@@ -19,9 +19,9 @@ export const PieContainer = (props: Props) => {
         <Pie
             width={400}
             height={400}
-            innerRadius={120}
-            outerRadius={180}
-            margin={[20,20]}
+            innerRadius={110}
+            outerRadius={170}
+            margin={[45,30]}
             strokeWidth={1} strokeColor={'red'}
             paletteMap={paletteMap}
         />
