@@ -45,7 +45,7 @@ export const Pie = (props: Props) => {
       <path className="arc" d={arc.createArc(arc.data)} fill={arc.colors(arc.data)} />
       <text
         transform={`translate(${arc.centroid(arc.data)})`}
-        textAnchor="middle" fill="white" fontSize="10"
+        textAnchor="middle" fill="white" fontSize="12"
       >
         {arc.format(arc.data)}
       </text>
@@ -59,16 +59,23 @@ export const Pie = (props: Props) => {
   const createArc = d3
     .arc<d3.PieArcDatum<ArcValue>>()
     .innerRadius(props.innerRadius)
-    .outerRadius(props.outerRadius);
+    .outerRadius(props.outerRadius)
+    .padAngle(0.03);
+
+  const createArcForText = d3
+    .arc<d3.PieArcDatum<ArcValue>>()
+    .innerRadius(props.innerRadius + 50)
+    .outerRadius(props.outerRadius + 50)
+    .padAngle(0.03);
+
   const palette = Object.assign({}, ...props.paletteMap.map((item)=> ({[item.key]: item.color})));
   const colors = (data:any) => (palette[data.data.name] || '#FFF');
   const format = (data:any) => (data.data.percentage + '%') 
-
   const data = createPie(pieData);
 
   return (
     <div className='pie'>
-      <svg width={props.width} viewBox={`0 0 ${props.width} ${props.height+20}`}>
+      <svg width={props.width + props.margin[0]} height={props.height + props.margin[1]} viewBox={`0 0 ${props.width + props.margin[0]} ${props.height + props.margin[1]}`}>
         <g transform={`translate(${props.outerRadius + props.margin[0]} ${props.outerRadius + props.margin[1]})`}>
             {data.map((d, i) => (
               <Arc
@@ -76,7 +83,7 @@ export const Pie = (props: Props) => {
                 index={i}
                 data={d}
                 createArc={createArc}
-                centroid={createArc.centroid}
+                centroid={createArcForText.centroid}
                 colors={colors}
                 format={format}
               />
