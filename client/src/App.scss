@@ -1,10 +1,17 @@
+@font-face {
+  font-family: HelveticaNeueThin;
+  src: url("fonts/HelveticaNeueThin.otf") format("opentype");
+}
 body{
   background-color: #282c34;
+  font-family: 'HelveticaNeueThin';
 }
 .App {
   text-align: center;
+  
   .App-header {
     color: #FFF;
+    font-size: 32px;
   }
 }
 
@@ -28,6 +35,25 @@ section.App-main{
     .title{
      color: #FFF;
     }
+    
+    .react-dropdown-select{
+      margin: 0 auto;
+      max-width: 200px;
+      .react-dropdown-select-content{
+        color: #FFF;
+        font-size: 20px;
+      }
+      .react-dropdown-select-dropdown-handle{
+        color: #FFF;
+      }
+      .react-dropdown-select-dropdown{
+        max-width: 200px;
+        .react-dropdown-select-item-selected{
+          background: #282c34;
+        }
+      }
+    }
+  
     .chart{
       stroke-width: 0.2;
       .ticks{

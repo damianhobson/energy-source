@@ -28,7 +28,7 @@ export const Axis = (props: Props) => {
     .range([props.height, props.margin[1]] || [0,0])
 
   const ticksX = useMemo(() => {
-    const pixelsPerTick = 50
+    const pixelsPerTick = 50;
     const numberOfTicksTarget = Math.max(
       1,
       Math.floor(
