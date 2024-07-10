@@ -66,7 +66,6 @@ section.App-main{
     }
     .legend{
       display: flex;
-      border-radius: 3px;
       margin: 0 auto;
       color:#FFF;
       flex-direction: row;
@@ -79,7 +78,7 @@ section.App-main{
           margin: 0 10px;
         }
         .colorLine{
-          margin-top: 6px;
+          margin-top: 3px;
           width: 20px;
           height: 8px;
         }
