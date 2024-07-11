@@ -7,6 +7,7 @@ interface Props {
   strokeWidth: number;
   strokeColor: string;
   maxY: number;
+  ylabel: string;
   setDomainX: Function;
   domainX: [Date, Date];
   margin: [number, number];
@@ -61,10 +62,22 @@ export const Axis = (props: Props) => {
     [0, props.maxY].join("-"),
     [props.height, 0].join("-")
   ])
-
+  console.log('props.ylabel : ', props.ylabel);
   return (
     <g>
       <path d={`M ${props.margin[0]} ${props.height - props.margin[1]} H ${props.width - props.margin[0]}`} stroke="#FFF"/>
+      <g transform={`translate(5, ${(props.height / 2) - 5})`}>
+        <text
+          transform= "rotate(-90)"
+          style={{
+            fontSize: "6px",
+            fill: "#FFF",
+            textAnchor: "end",
+          }}>
+            {props.ylabel}
+          </text>
+      </g>
+
       <path d={`M ${props.margin[0]} ${props.height - props.margin[1]} L ${props.margin[0]} 0`} stroke="#FFF"/>
       {ticksX.map(({ value, xOffset }) => (
         <g
