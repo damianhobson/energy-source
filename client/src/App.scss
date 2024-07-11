@@ -48,9 +48,15 @@ section.App-main{
       }
       .react-dropdown-select-dropdown{
         max-width: 200px;
-        .react-dropdown-select-item-selected{
+        .react-dropdown-select-item:not(.react-dropdown-select-item-selected){
           background: #282c34;
+          color: #fff;
         }
+        .react-dropdown-select-item-selected{
+          background: #fff;
+          color: #282c34
+        }
+
       }
     }
   

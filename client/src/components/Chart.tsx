@@ -1,7 +1,6 @@
 import { useState} from 'react';
 import { GraphLine } from './GraphLine';
 import { Axis } from './Axis';
-import { Pie } from './Pie';
 
 interface Props {
   title: string;
@@ -10,13 +9,14 @@ interface Props {
   height: number;
   strokeWidth: number;
   strokeColor: string;
+  ylabel: string;
 }
 
 export const Chart = (props: Props) => {
 
   const [domainX, setDomainX] = useState<[Date, Date]>([new Date(), new Date()]);
   const [maxY, setMaxY] = useState<number>(6000);
-  const [margin, setMargin] = useState<[number, number]>([15, 0]);
+  const [margin, setMargin] = useState<[number, number]>([20, 0]);
 
   return (
     <div className="chart">
@@ -35,7 +35,7 @@ export const Chart = (props: Props) => {
           <Axis maxY={maxY}
             domainX={domainX} setDomainX={setDomainX}
             width={props.width} height={props.height}
-            margin={margin}
+            margin={margin} ylabel={props.ylabel}
             strokeWidth={0.5} strokeColor={'#FFF'}/>
       </svg>
     </div>
