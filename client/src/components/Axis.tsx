@@ -62,7 +62,7 @@ export const Axis = (props: Props) => {
     [0, props.maxY].join("-"),
     [props.height, 0].join("-")
   ])
-  console.log('props.ylabel : ', props.ylabel);
+
   return (
     <g>
       <path d={`M ${props.margin[0]} ${props.height - props.margin[1]} H ${props.width - props.margin[0]}`} stroke="#FFF"/>
